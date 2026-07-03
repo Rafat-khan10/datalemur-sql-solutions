@@ -14,7 +14,7 @@ SQL solutions to DataLemur problems (Easy & Medium).
 | Difficulty | Solved |
 |------------|--------|
 | Easy       | 8   |
-| Medium     | 5    |
+| Medium     | 6    |
 
 ## 🔗 Profile
 [My DataLemur Profile] https://datalemur.com/profile
