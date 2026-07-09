@@ -5,24 +5,19 @@
 
 -- Solution:
 
-WITH cte AS (SELECT
-  *
-FROM filed_taxes  
-WHERE product LIKE 'TurboTax%'
-), 
-
-cte2 AS (
+WITH cte AS (
 SELECT 
    *,
   LAG(filing_date) OVER(PARTITION BY user_id ORDER BY filing_date ASC) AS prev_filing_date,
   filing_date AS current_filing_date,
   LEAD(filing_date) OVER(PARTITION BY user_id ORDER BY filing_date ASC) AS next_filing_date
-FROM cte 
+FROM filed_taxes 
+WHERE product LIKE 'TurboTax%'
 )
-  
+
 SELECT
   DISTINCT user_id
-FROM cte2 
+FROM cte
 WHERE prev_filing_date IS NOT NULL
 AND next_filing_date IS NOT NULL 
 AND EXTRACT(YEAR FROM current_filing_date) - EXTRACT(YEAR FROM prev_filing_date) =1
